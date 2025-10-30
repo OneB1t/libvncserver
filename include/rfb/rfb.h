@@ -214,6 +214,7 @@ typedef struct _rfbScreenInfo
     rfbPixel blackPixel;
     rfbPixel whitePixel;
 
+
     /**
      * some screen specific data can be put into a struct where screenData
      * points to. You need this if you have more than one screen at the
@@ -376,6 +377,9 @@ typedef struct _rfbScreenInfo
 #endif
     /* Timeout value for select() calls, mainly used for multithreaded servers. */
     int select_timeout_usec;
+#ifdef LIBVNCSERVER_HAVE_LIBZ
+    int zlibCompressLevel; // <<< ADD THIS LINE
+#endif
 } rfbScreenInfo, *rfbScreenInfoPtr;
 
 

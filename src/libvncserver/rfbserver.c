@@ -100,6 +100,8 @@
 #endif
 #endif
 
+
+
 #ifdef LIBVNCSERVER_HAVE_LIBJPEG
 /*
  * Map of quality levels to provide compatibility with TightVNC/TigerVNC
@@ -515,7 +517,11 @@ rfbNewTCPOrUDPClient(rfbScreenInfoPtr rfbScreen,
       cl->compStream.zfree = Z_NULL;
       cl->compStream.opaque = Z_NULL;
 
-      cl->zlibCompressLevel = 5;
+        if (rfbScreen->zlibCompressLevel >= 0) {
+            cl->zlibCompressLevel = rfbScreen->zlibCompressLevel;
+        } else {
+            cl->zlibCompressLevel = 8; /* Fallback to the original default */
+        }
 #endif
 
       cl->progressiveSliceY = 0;
